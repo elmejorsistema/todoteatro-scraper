@@ -4,6 +4,7 @@ import unicodedata
 from bs4 import BeautifulSoup
 from datetime import datetime
 import json
+import time
 
 # Categorías de Wikipedia que vamos a scrapeaer
 WIKI_CATEGORIES = [
