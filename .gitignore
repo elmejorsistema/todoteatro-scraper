@@ -1,0 +1,11 @@
+# Entorno virtual
+.venv/
+
+# Token y secretos
+tokenRobotito
+.jwt
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
