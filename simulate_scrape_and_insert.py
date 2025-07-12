@@ -129,11 +129,14 @@ def get_existing_people(headers):
 def insert_person(person, headers):
     url = 'https://back.todoteatro.mx/admin/people'
     response = requests.post(url, headers=headers, data=person)
-    if response.status_code == 201:
-        print(f"✅ Insertado: {person['artistic_name']}")
-    else:
-        print(f"❌ Error al insertar {person['artistic_name']}: {response.status_code} {response.text}")
+    if response.status_code != 201:
+        error_msg = f"{person['artistic_name']} -> {response.status_code} {response.text}\n"
+        with open('errores.log', 'a', encoding='utf-8') as log:
+            log.write(error_msg)
 
+
+# Limpiar el archivo de errores previo
+open('errores.log', 'w').close()
 
 # 🔹 Inicia el proceso
 scraped = []
@@ -170,4 +173,5 @@ print("\n📁 Archivo 'nombres.json' guardado correctamente.")
 # 🚀 Insertar personas una por una
 for person in to_insert:
     insert_person(person, HEADERS)
+    time.sleep(0.25)
 
